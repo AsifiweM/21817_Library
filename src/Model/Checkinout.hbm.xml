@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-May-2020 21:35:25 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Checkinout" table="checkinout" catalog="hibernate" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="book" class="Model.Book" fetch="select">
+            <column name="bookid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="users" class="Model.Users" fetch="select">
+            <column name="userid" not-null="true" />
+        </many-to-one>
+        <property name="doneAt" type="date">
+            <column name="done_at" length="10" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

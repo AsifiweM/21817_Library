@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-May-2020 21:35:25 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Book" table="book" catalog="hibernate" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="title" type="string">
+            <column name="title" length="15" not-null="true" />
+        </property>
+        <property name="publishinghouse" type="string">
+            <column name="publishinghouse" length="15" not-null="true" />
+        </property>
+        <property name="publishingdate" type="date">
+            <column name="publishingdate" length="10" not-null="true" />
+        </property>
+        <property name="author" type="string">
+            <column name="author" length="15" not-null="true" />
+        </property>
+        <property name="pages" type="int">
+            <column name="pages" not-null="true" />
+        </property>
+        <set name="checkinouts" table="checkinout" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="bookid" not-null="true" />
+            </key>
+            <one-to-many class="Model.Checkinout" />
+        </set>
+    </class>
+</hibernate-mapping>
