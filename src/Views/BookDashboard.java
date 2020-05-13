@@ -11,6 +11,7 @@ import java.awt.Image;
 import static java.lang.Integer.parseInt;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -249,6 +250,11 @@ public class BookDashboard extends javax.swing.JFrame {
         });
 
         deletebtn2.setText("Delete");
+        deletebtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletebtn2ActionPerformed(evt);
+            }
+        });
 
         populatebtn.setText("Populate");
         populatebtn.addActionListener(new java.awt.event.ActionListener() {
@@ -422,7 +428,7 @@ public class BookDashboard extends javax.swing.JFrame {
         transact.commit();
         session.close();
 
-        System.out.println("Updated successfully");
+        JOptionPane.showMessageDialog(this, "Book Updated Successfully!!");
     }//GEN-LAST:event_updatebtn2ActionPerformed
 
     private void populatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_populatebtnActionPerformed
@@ -483,7 +489,7 @@ public class BookDashboard extends javax.swing.JFrame {
             transact.commit();
             session.close();
             
-            System.out.println("Book Successfully saved");
+            JOptionPane.showMessageDialog(this, "Book Created Successfully!!");
         } catch(Exception e){
             System.out.println(e);
         }
@@ -504,6 +510,12 @@ public class BookDashboard extends javax.swing.JFrame {
         new Dashboard().setVisible(true);
         dispose();
     }//GEN-LAST:event_Backbtn1ActionPerformed
+
+    private void deletebtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtn2ActionPerformed
+        // TODO add your handling code here:
+        
+        JOptionPane.showMessageDialog(this, "Book deleted Successfully!!");
+    }//GEN-LAST:event_deletebtn2ActionPerformed
 
     /**
      * @param args the command line arguments

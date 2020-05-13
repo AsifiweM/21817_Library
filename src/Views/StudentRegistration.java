@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -54,8 +55,6 @@ public class StudentRegistration extends javax.swing.JFrame {
         typecombo = new javax.swing.JComboBox();
         photoDisplay = new javax.swing.JLabel();
         BrowseBtn = new javax.swing.JButton();
-        Updatebtn = new javax.swing.JButton();
-        Deletebtn = new javax.swing.JButton();
         Savebtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
@@ -85,20 +84,6 @@ public class StudentRegistration extends javax.swing.JFrame {
             }
         });
 
-        Updatebtn.setText("Update");
-        Updatebtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdatebtnActionPerformed(evt);
-            }
-        });
-
-        Deletebtn.setText("Delete");
-        Deletebtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeletebtnActionPerformed(evt);
-            }
-        });
-
         Savebtn.setText("Save");
         Savebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,12 +107,7 @@ public class StudentRegistration extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(Updatebtn)
-                            .addGap(18, 18, 18)
-                            .addComponent(Deletebtn)
-                            .addGap(18, 18, 18)
-                            .addComponent(Savebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Savebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(BrowseBtn)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -178,10 +158,7 @@ public class StudentRegistration extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(BrowseBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Updatebtn)
-                    .addComponent(Deletebtn)
-                    .addComponent(Savebtn))
+                .addComponent(Savebtn)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(81, 81, 81))
@@ -216,42 +193,6 @@ public class StudentRegistration extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BrowseBtnActionPerformed
 
-    private void UpdatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdatebtnActionPerformed
-        // TODO add your handling code here:
-        
-        
-        String firstName = firstnamefield.getText();
-        String lastName = lastnamefield.getText();
-        String email = emailfield.getText();
-        String phone = phonefield.getText();
-        String type = typecombo.getSelectedItem().toString();
-        
-        Session session = Utils.Connect.getSessionFactory().openSession();
-        Transaction transact = session.beginTransaction();
-        
-        Users student = (Users)session.load(Users.class, 3);
-        
-        student.setLastName(lastName);
-        student.setFirstName(firstName);
-        student.setLastName(lastName);
-        student.setPath(filepath);
-        student.setPhoneNumber(phone);
-        student.setEmail(email);
-        student.setType(type);
-        student.setId(1);
-        
-        session.save(student);
-        transact.commit();
-        session.close();
-        
-        System.out.println("Updated successfully");
-    }//GEN-LAST:event_UpdatebtnActionPerformed
-
-    private void DeletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletebtnActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_DeletebtnActionPerformed
-
     private void SavebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavebtnActionPerformed
         // TODO add your handling code here:
         
@@ -278,12 +219,10 @@ public class StudentRegistration extends javax.swing.JFrame {
             session.save(user);
             transact.commit();
             session.close();
+            JOptionPane.showMessageDialog(this, "New Client created Successfully!!");
         } catch (Exception e) {
            System.out.println(e);
         }
-        
-        
-        System.out.println("Saved successfully");
         
     }//GEN-LAST:event_SavebtnActionPerformed
 
@@ -332,9 +271,7 @@ public class StudentRegistration extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BrowseBtn;
-    private javax.swing.JButton Deletebtn;
     private javax.swing.JButton Savebtn;
-    private javax.swing.JButton Updatebtn;
     private javax.swing.JTextField emailfield;
     private javax.swing.JTextField firstnamefield;
     private javax.swing.JButton jButton1;

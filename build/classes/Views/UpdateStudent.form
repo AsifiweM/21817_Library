@@ -39,17 +39,23 @@
                                       <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="phonefield" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="emailfield" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="firstnamefield" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="lastnamefield" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="typecombo" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="photoDisplay" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
-                                      <Component id="idfield" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="phonefield" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="emailfield" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="firstnamefield" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lastnamefield" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="typecombo" alignment="0" pref="124" max="32767" attributes="0"/>
+                                          <Component id="idfield" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="photoDisplay" min="-2" pref="124" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="Updatebtn" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="Deletebtn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="Updatebtn" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -107,13 +113,16 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="photoDisplay" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
+                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  <Component id="photoDisplay" min="-2" pref="124" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="BrowseBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="Updatebtn" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Updatebtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Deletebtn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="35" max="32767" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -220,6 +229,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="Deletebtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeletebtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

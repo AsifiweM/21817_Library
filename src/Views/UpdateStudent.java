@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -57,6 +58,7 @@ public class UpdateStudent extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         populatebtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        Deletebtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +109,13 @@ public class UpdateStudent extends javax.swing.JFrame {
             }
         });
 
+        Deletebtn.setText("Delete");
+        Deletebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeletebtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,15 +135,19 @@ public class UpdateStudent extends javax.swing.JFrame {
                                         .addComponent(jLabel5)
                                         .addComponent(jLabel6))
                                     .addGap(39, 39, 39)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(phonefield)
-                                        .addComponent(emailfield)
-                                        .addComponent(firstnamefield)
-                                        .addComponent(lastnamefield)
-                                        .addComponent(typecombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(photoDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(idfield)))
-                                .addComponent(Updatebtn))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(phonefield)
+                                            .addComponent(emailfield)
+                                            .addComponent(firstnamefield)
+                                            .addComponent(lastnamefield)
+                                            .addComponent(typecombo, 0, 124, Short.MAX_VALUE)
+                                            .addComponent(idfield))
+                                        .addComponent(photoDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(Deletebtn)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Updatebtn)))
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(populatebtn)
@@ -182,7 +195,9 @@ public class UpdateStudent extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(BrowseBtn)
                 .addGap(18, 18, 18)
-                .addComponent(Updatebtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Updatebtn)
+                    .addComponent(Deletebtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
@@ -217,8 +232,12 @@ public class UpdateStudent extends javax.swing.JFrame {
 
         Session session = Utils.Connect.getSessionFactory().openSession();
         Transaction transact = session.beginTransaction();
-
-        Users student = (Users)session.load(Users.class, 3);
+        
+        String sql = "from Users where id = " + idfield.getText();
+        
+        Query query = session.createQuery(sql);
+        
+        Users student = (Users)query.uniqueResult();
 
         student.setLastName(lastName);
         student.setFirstName(firstName);
@@ -227,17 +246,21 @@ public class UpdateStudent extends javax.swing.JFrame {
         student.setPhoneNumber(phone);
         student.setEmail(email);
         student.setType(type);
-        student.setId(1);
 
+        try{
         session.save(student);
         transact.commit();
         session.close();
 
-        System.out.println("Updated successfully");
+        JOptionPane.showMessageDialog(this, "Data saved Successfully!!");}
+        
+        catch(Exception e){
+            System.out.println(e);
+        }
     }//GEN-LAST:event_UpdatebtnActionPerformed
 
     private void populatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_populatebtnActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         
         String sql = "from Users where id = " + idfield.getText();
         
@@ -286,6 +309,11 @@ public class UpdateStudent extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void DeletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletebtnActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_DeletebtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -323,6 +351,7 @@ public class UpdateStudent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BrowseBtn;
+    private javax.swing.JButton Deletebtn;
     private javax.swing.JButton Updatebtn;
     private javax.swing.JTextField emailfield;
     private javax.swing.JTextField firstnamefield;
